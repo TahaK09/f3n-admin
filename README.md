@@ -36,5 +36,5 @@ This admin interface is built with **React**, **Axios**, **Tailwind CSS**, and i
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/your-username/f3news-admin-panel.git
-cd f3news-admin-panel
+git clone https://github.com/your-username/f3n-admin.git
+cd f3n-admin
