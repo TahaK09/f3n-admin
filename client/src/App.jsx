@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Logo from "./assets/f3news-logo-new.png";
 
 export default function AdminNewsPage() {
   const [articles, setArticles] = useState([]);
@@ -87,8 +88,13 @@ export default function AdminNewsPage() {
   return (
     <div className="bg-gray-100 min-h-screen">
       {/* Header */}
-      <div className="bg-[#46bae3] text-white py-10 px-6 text-center">
-        <h1 className="text-4xl font-bold mb-2">📰 F3News Admin Dashboard</h1>
+      <div className="bg-[#bbbbbb] text-white py-10 px-6 text-center">
+        <div className="flex flex-row gap-2">
+          <div className="w-24 h-24">
+            <img src={Logo} alt="logo" className="w-full h-full rounded-full" />
+          </div>
+          <div className="text-4xl font-bold mb-2">F3News Admin Dashboard</div>
+        </div>
         <p className="text-lg opacity-90">
           Manage news articles, publish updates, and highlight top stories.
         </p>
