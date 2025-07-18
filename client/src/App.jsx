@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Logo from "./assets/f3news-logo-new.png";
 import HomeSection from "./components/homeSection";
+import VideoFeatures from "./Pages/videoFeatured";
 
 export default function AdminNewsPage() {
   return (
@@ -22,7 +23,8 @@ export default function AdminNewsPage() {
       </div>
 
       {/* Section */}
-      <HomeSection />
+      {/* <HomeSection /> */}
+      <VideoFeatures />
     </div>
   );
 }
