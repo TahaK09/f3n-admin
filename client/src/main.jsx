@@ -5,6 +5,7 @@ import * as ReactDOM from "react-dom/client";
 import HomeSection from "./components/homeSection";
 import ArticleSection from "./components/articleSection";
 import ImageSection from "./components/imageSection";
+import VideoFeatures from "./Pages/videoFeatured";
 import "./index.css";
 import App from "./App.jsx";
 
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: "/edit-article", element: "Edit Articles" },
       { path: "/image-gallery", element: <ImageSection /> },
       { path: "/promotions", element: "Promotions" },
+      { path: "/featured-video", element: <VideoFeatures /> },
       { path: "/add-links", element: "Add Links" },
     ],
   },
