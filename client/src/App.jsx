@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Logo from "./assets/f3news-logo-new.png";
+import { Outlet } from "react-router-dom";
 import HomeSection from "./components/homeSection";
 import VideoFeatures from "./Pages/videoFeatured";
 
@@ -22,9 +23,9 @@ export default function AdminNewsPage() {
         </div>
       </div>
 
-      {/* Section */}
-      {/* <HomeSection /> */}
-      <VideoFeatures />
+      {/* <Nav /> */}
+      <Outlet />
+      {/* <Footer /> */}
     </div>
   );
 }

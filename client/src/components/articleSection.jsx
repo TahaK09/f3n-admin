@@ -88,7 +88,7 @@ function ArticleSection() {
       {/* Form */}
       <div className="max-w-5xl mx-auto p-6 bg-white mt-6 rounded-xl shadow">
         <h2 className="text-2xl font-semibold mb-4">
-          {editId ? "✏️ Edit Article" : "🆕 Create New Article"}
+          {editId ? "Edit Article" : "Create New Article"}
         </h2>
         <form
           onSubmit={handleSubmit}

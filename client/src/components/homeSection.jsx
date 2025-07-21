@@ -1,9 +1,11 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function HomeSection() {
   const pageArr = [
     {
       name: "Add Article",
+      link: "/add-articles",
       logo: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -23,6 +25,7 @@ function HomeSection() {
     },
     {
       name: "Edit Article",
+      link: "edit-article",
       logo: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -45,6 +48,7 @@ function HomeSection() {
     },
     {
       name: "Image Gallery",
+      link: "image-gallery",
       logo: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -67,6 +71,7 @@ function HomeSection() {
     },
     {
       name: "Promotions",
+      link: "promotions",
       logo: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -86,6 +91,7 @@ function HomeSection() {
     },
     {
       name: "Add Links",
+      link: "add-links",
       logo: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -117,6 +123,7 @@ function HomeSection() {
     },
     {
       name: "Featured Video",
+      link: "featured-video",
       logo: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -135,20 +142,22 @@ function HomeSection() {
       ),
     },
   ];
+
   return (
     <>
       <div className="w-full min-h-screen flex justify-center items-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {pageArr.map((page, idx) => (
-            <div
+            <NavLink
               key={idx}
+              to={page.link}
               className="flex flex-col gap-1 w-[200px] h-[300px] py-3 px-2.5 rounded-xl shadow-md border border-gray-200 hover:scale-110 transition-all shadow-gray-300 justify-center items-center cursor-pointer"
             >
               {page.logo}
               <div className="text-lg font-medium text-gray-500">
                 {page.name}
               </div>
-            </div>
+            </NavLink>
           ))}
         </div>
       </div>
