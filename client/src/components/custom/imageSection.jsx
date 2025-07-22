@@ -1,19 +1,13 @@
 import React from "react";
+import ImageUploadButton from "../custom/imageUploadBtn";
 
 function ImageSection() {
   return (
     <>
       <section className="image-section w-2xl rounded-lg p-2.5 bg-white border border-gray-200 mx-auto mt-20">
         <form className="flex flex-col gap-2">
-          <div className="form-group bg-white border border-gray-200 rounded-md flex justify-center items-center w-full h-20">
-            <input
-              className="w-full h-full"
-              type="file"
-              id="imageUpload"
-              name="image"
-              accept="image/*"
-            />
-          </div>
+          <ImageUploadButton />
+
           <div className="form-group">
             <input
               type="text"
@@ -40,6 +34,7 @@ function ImageSection() {
           </button>
         </form>
       </section>
+      {/* Preview of the image in the side */}
     </>
   );
 }
