@@ -1,1 +1,12 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+.jodit-wysiwyg {
+  min-height: 500px !important;
+}
+
+.cl-internal-1dauvpw {
+  display: none;
+}

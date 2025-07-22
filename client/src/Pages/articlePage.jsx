@@ -2,17 +2,31 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import JoditEditor from "jodit-react";
 import { Textarea } from "@/components/ui/textarea";
-import ImageUploadButton from "../components/custom/imageUploadButton";
+import ImageUploadButton from "../components/custom/imageUploadBtn";
 import toast from "react-hot-toast";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 function Article() {
   const [formData, setFormData] = useState({
     image: "",
     title: "",
     description: "",
+    tags: "",
     author: "",
     content: "",
     category: "",
+    is_Featured: false,
     date: new Date(),
   });
 
@@ -102,7 +116,7 @@ function Article() {
       );
 
       if (res.data.success) {
-        toast.success(res.data.message || "Blog posted successfully!");
+        toast.success(res.data.message || "Article posted successfully!");
         setFormData({
           image: "",
           title: "",
@@ -117,7 +131,7 @@ function Article() {
         toast.error(res.data.message || "Upload failed!");
       }
     } catch (err) {
-      toast.error("Error uploading blog!");
+      toast.error("Error posting Article!");
     }
 
     setLoading(false);
@@ -137,7 +151,7 @@ function Article() {
                 content: newContent,
               }))
             }
-            placeholder="Write your blog content here..."
+            placeholder="Write your Article here..."
             className="rounded-md border h-full overflow-scroll"
           />
         </div>
@@ -155,13 +169,23 @@ function Article() {
             )}
           </div>
 
-          {/* Input Fields */}
+          {/* Title */}
           <input
             className="outline-none rounded-md border border-gray-500/40 p-2"
             type="text"
             name="title"
             placeholder="Title"
             value={formData.title}
+            onChange={handleChange}
+          />
+
+          {/* Tags */}
+          <input
+            className="outline-none rounded-md border border-gray-500/40 p-2"
+            type="text"
+            name="tags"
+            placeholder="Tags (Seperated by commas)"
+            value={formData.tags}
             onChange={handleChange}
           />
 
@@ -181,15 +205,53 @@ function Article() {
             value={formData.author}
             onChange={handleChange}
           />
-
-          <input
-            className="outline-none rounded-md border border-gray-500/40 p-2"
-            type="text"
-            name="category"
-            placeholder="Category"
+          <Select
             value={formData.category}
-            onChange={handleChange}
-          />
+            onValueChange={(value) =>
+              setFormData((prevData) => ({ ...prevData, category: value }))
+            }
+          >
+            <SelectTrigger className="w-full outline-none rounded-md border border-gray-500/40 bg-white text-gray-600">
+              <SelectValue placeholder="Select Category" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup className="bg-white outline-none">
+                <SelectItem value="india">India</SelectItem>
+                <SelectItem value="mumbai">Mumbai</SelectItem>
+                <SelectItem value="politics">Politics</SelectItem>
+                <SelectItem value="opinion">Opinion</SelectItem>
+                <SelectItem value="world">World</SelectItem>
+                <SelectItem value="business">Business</SelectItem>
+                <SelectItem value="entertainment">Entertainment</SelectItem>
+                <SelectItem value="sports">Sports</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+
+          {/* is featured */}
+
+          <Label
+            value={formData.is_Featured}
+            onValueChange={(value) =>
+              setFormData((prevData) => ({ ...prevData, is_Featured: value }))
+            }
+            className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-[[aria-checked=true]]:border-blue-600 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 dark:has-[[aria-checked=true]]:bg-blue-950"
+          >
+            <Checkbox
+              id="toggle-2"
+              defaultChecked
+              className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+            />
+            <div className="grid gap-1.5 font-normal">
+              <p className="text-sm leading-none font-medium">
+                Feature this Article
+              </p>
+              <p className="text-muted-foreground text-sm">
+                By checking this box, your article will be featured on the top
+                of the platform.
+              </p>
+            </div>
+          </Label>
 
           {/* Submit Button */}
           <button
@@ -198,7 +260,7 @@ function Article() {
             disabled={loading}
             onClick={handleSubmit}
           >
-            {loading ? "Posting..." : "Post Blog"}
+            {loading ? "Posting..." : "Post Article"}
           </button>
 
           {/* Save Draft Button (localStorage only) */}
