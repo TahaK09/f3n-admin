@@ -138,8 +138,8 @@ function Article() {
   };
 
   return (
-    <div className="flex justify-center items-center py-10 px-4">
-      <div className="bg-white rounded-xl border border-gray-200 items-center shadow-md min-h-[700px] p-6 w-full max-w-[1300px] flex flex-col lg:flex-row gap-6">
+    <div className="flex justify-center items-center w-full">
+      <div className="bg-white items-center min-h-[700px] px-20 py-6 w-full flex flex-col lg:flex-row gap-6">
         {/* Editor Section */}
         <div className="flex-1 w-full h-full">
           <JoditEditor

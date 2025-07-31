@@ -4,13 +4,6 @@ import Logo from "./assets/f3news-logo-new.png";
 import { Outlet } from "react-router-dom";
 import HomeSection from "./components/custom/homeSection";
 import VideoFeatures from "./Pages/videoFeatured";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarHeader,
-} from "./components/ui/sidebar";
 
 export default function AdminNewsPage() {
   return (
@@ -30,14 +23,6 @@ export default function AdminNewsPage() {
         </div>
       </div>
 
-      <Sidebar>
-        <SidebarHeader />
-        <SidebarContent>
-          <SidebarGroup />
-          <SidebarGroup />
-        </SidebarContent>
-        <SidebarFooter />
-      </Sidebar>
       {/* <Nav /> */}
       <Outlet />
       {/* <Footer /> */}
