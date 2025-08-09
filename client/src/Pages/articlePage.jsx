@@ -20,19 +20,23 @@ import { Label } from "@/components/ui/label";
 function Article() {
   const [formData, setFormData] = useState({
     image: "",
+    imgDescription: "",
     title: "",
-    description: "",
+    summary: "",
     tags: "",
     author: "",
     content: "",
     category: "",
+    subcategory: "",
     is_Featured: false,
-    date: new Date(),
+    status: "Published",
   });
 
   const [loading, setLoading] = useState(false);
   const [imageUploading, setImageUploading] = useState(false); // New
   const editor = useRef(null);
+  const [imgPreview, setImgPreview] = useState("");
+  const [imgUploadSuc, setImgUploadSuc] = useState(false);
 
   useEffect(() => {
     // Auto-load draft if exists
@@ -53,12 +57,12 @@ function Article() {
       setImageUploading(true);
       const data = new FormData();
       data.append("file", file);
-      data.append("upload_preset", "intl_blog_image");
-      data.append("cloud_name", "duqdylsde");
+      data.append("upload_preset", "thumbnail_f3n");
+      data.append("cloud_name", "dwrhlxmd6");
 
       try {
         const res = await fetch(
-          "https://api.cloudinary.com/v1_1/duqdylsde/image/upload",
+          "https://api.cloudinary.com/v1_1/dwrhlxmd6/image/upload",
           {
             method: "POST",
             body: data,
@@ -73,6 +77,8 @@ function Article() {
             image: imageURL.url,
           }));
           toast.success("Image uploaded!");
+          setImgPreview(imageURL.url);
+          setImgUploadSuc(true);
         } else {
           toast.error("Image upload failed!");
         }
@@ -103,15 +109,19 @@ function Article() {
       }
 
       const res = await axios.post(
-        `${import.meta.env.VITE_RENDER_API}/admin/blogs/add`,
+        `http://localhost:3000/api/articles/create`,
         {
-          img: formData.image,
+          image_url: formData.image,
           title: formData.title,
-          description: formData.description,
+          imgDescription: formData.imgDescription,
+          summary: formData.summary,
           author: formData.author,
           content: formData.content,
           category: formData.category,
-          date: new Date().toISOString(),
+          subcategory: formData.category,
+          tags: formData.tags,
+          is_featured: formData.is_featured,
+          status: formData.status,
         }
       );
 
@@ -120,12 +130,14 @@ function Article() {
         setFormData({
           image: "",
           title: "",
+          imgDescription: "",
           description: "",
           author: "",
           content: "",
           category: "",
           date: new Date(),
         });
+        setImgUploadSuc(false);
         localStorage.removeItem("blogData"); // Clear draft after posting
       } else {
         toast.error(res.data.message || "Upload failed!");
@@ -159,16 +171,37 @@ function Article() {
         {/* Side Form Section */}
         <div className="w-full lg:w-[350px] flex flex-col self-start gap-4">
           {/* Image Upload */}
-          <div>
-            <label className="text-lg text-[#535353] font-medium block mb-2">
-              Upload Image
-            </label>
-            <ImageUploadButton onChange={handleUpload} />
-            {imageUploading && (
-              <p className="text-sm text-gray-500 mt-1">Uploading Image...</p>
+          <div className="w-full h-full">
+            {imgUploadSuc && (
+              <img
+                className="w-auto h-full"
+                src={imgPreview}
+                alt="image preview"
+              />
+            )}
+            {!imgUploadSuc && (
+              <div>
+                <label className="text-lg text-[#535353] font-medium block mb-2">
+                  Upload Image
+                </label>
+                <ImageUploadButton onChange={handleUpload} />
+                {imageUploading && (
+                  <p className="text-sm text-gray-500 mt-1">
+                    Uploading Image...
+                  </p>
+                )}
+              </div>
             )}
           </div>
-
+          {/* Image Description */}
+          <input
+            className="outline-none rounded-md border border-gray-500/40 p-2"
+            type="text"
+            name="imgDescription"
+            placeholder="Image Description"
+            value={formData.imgDescription}
+            onChange={handleChange}
+          />
           {/* Title */}
           <input
             className="outline-none rounded-md border border-gray-500/40 p-2"
@@ -191,10 +224,10 @@ function Article() {
 
           <Textarea
             className="outline-none rounded-md border border-gray-500/40 p-2"
-            name="description"
-            value={formData.description}
+            name="summary"
+            value={formData.summary}
             onChange={handleChange}
-            placeholder="Short Description"
+            placeholder="Summary"
           />
 
           <input
@@ -229,7 +262,7 @@ function Article() {
           </Select>
 
           {/* is featured */}
-
+          {/* This is currently not working! */}
           <Label
             value={formData.is_Featured}
             onValueChange={(value) =>
@@ -239,7 +272,6 @@ function Article() {
           >
             <Checkbox
               id="toggle-2"
-              defaultChecked
               className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
             />
             <div className="grid gap-1.5 font-normal">
@@ -268,10 +300,7 @@ function Article() {
             className="bg-gray-700 hover:bg-gray-800 text-white rounded-full py-2 text-sm transition"
             type="button"
             disabled={loading}
-            onClick={() => {
-              localStorage.setItem("blogData", JSON.stringify(formData));
-              toast.success("Draft saved locally!");
-            }}
+            onClick={handleSubmit}
           >
             Save Draft
           </button>
