@@ -33,7 +33,7 @@ function VideoFeatures() {
       }
 
       const res = await axios.post(
-        `http://localhost:3000/api/featuredvideo/add`,
+        `${import.meta.env.VITE_RENDER_SERVER_URL}/api/featuredvideo/add`,
         formData
       );
 

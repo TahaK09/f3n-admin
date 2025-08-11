@@ -55,7 +55,7 @@ export default function PrivateLayout() {
         {/* Desktop Button */}
         <button
           onClick={handleLogout}
-          className="bg-white text-gray-700 md:inline hidden text-sm hover:opacity-90 active:scale-95 transition-all w-40 h-11 rounded-full"
+          className="bg-white text-gray-700 md:inline hidden text-sm hover:opacity-90 active:scale-95 transition-all w-40 h-11 rounded-full cursor-pointer"
         >
           Sign Out
         </button>

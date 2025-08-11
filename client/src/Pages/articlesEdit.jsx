@@ -8,7 +8,9 @@ function ArticlesEdit() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/articles`);
+        const res = await axios.get(
+          `${import.meta.env.VITE_RENDER_SERVER_URL}/api/articles`
+        );
         if (res.data.success && res.data.articles) {
           setArticles(res.data.articles);
         }

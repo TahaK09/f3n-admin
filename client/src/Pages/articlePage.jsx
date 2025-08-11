@@ -100,7 +100,7 @@ function Article() {
       }
 
       const res = await axios.post(
-        `http://localhost:3000/api/articles/create`,
+        `${import.meta.env.VITE_RENDER_SERVER_URL}/api/articles/create`,
         {
           image_url: formData.image_url,
           title: formData.title,
