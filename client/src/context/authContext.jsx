@@ -1,43 +1,34 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { supabase } from "../supaBaseClient.jsx";
+import { supabase } from "../lib/supaBaseClient.js";
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [session, setSession] = useState(null);
+  const [user, setUser] = useState(null); // Adding user state upon Login
   const [loading, setLoading] = useState(true);
-
-  // Sign Up (New User)
-  const signUpNewUser = async (email, password) => {
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-
-      if (error) throw error;
-
-      return { success: true, data };
-    } catch (error) {
-      console.error("Error signing up:", error.message);
-      return { success: false, error: error.message };
-    }
-  };
 
   // Sign In (Existing User)
   const signInUser = async (email, password) => {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+        email: email.toLowerCase(),
+        password: password,
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error("Sign-in error:", error.message);
+        return { success: false, error: error.message };
+      }
 
+      console.log("Sign-in success:", data);
       return { success: true, data };
     } catch (error) {
-      console.error("Error signing in:", error.message);
-      return { success: false, error: error.message };
+      console.error("Unexpected error during sign-in:", error.message);
+      return {
+        success: false,
+        error: "An unexpected error occurred. Please try again.",
+      };
     }
   };
 
@@ -58,6 +49,7 @@ export const AuthContextProvider = ({ children }) => {
         data: { session },
       } = await supabase.auth.getSession();
       setSession(session);
+      setUser(session?.user || null); // Setting up the user
       setLoading(false);
     };
 
@@ -66,6 +58,7 @@ export const AuthContextProvider = ({ children }) => {
     const { data: subscription } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setSession(session);
+        setUser(session?.user || null); // Update user when session changes
       }
     );
 
@@ -76,13 +69,11 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ session, loading, signUpNewUser, signInUser, signOut }}
+      value={{ session, user, loading, signInUser, signOut }} // Expose user to Client
     >
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const UserAuth = () => {
-  return useContext(AuthContext);
-};
+export const UserAuth = () => useContext(AuthContext);
