@@ -6,13 +6,13 @@ import HomeSection from "./components/custom/homeSection";
 import VideoFeatures from "./Pages/videoFeatured";
 import { Toaster } from "react-hot-toast";
 
-export default function AdminNewsPage() {
+export default function App() {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <div className="bg-gray-100 min-h-screen w-full">
         {/* Header */}
-        <div className="bg-[#bbbbbb] text-white py-14 px-6 w-full flex flex-col justify-center items-center">
+        {/* <div className="bg-[#bbbbbb] text-white py-14 px-6 w-full flex flex-col justify-center items-center">
           <div className="flex flex-row gap-3 justify-center items-center">
             <div className="w-24 h-24">
               <img
@@ -29,7 +29,7 @@ export default function AdminNewsPage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* <Nav /> */}
         <Outlet />

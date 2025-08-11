@@ -19,7 +19,7 @@ import { Label } from "@/components/ui/label";
 
 function Article() {
   const [formData, setFormData] = useState({
-    image: "",
+    image_url: "",
     imgDescription: "",
     title: "",
     summary: "",
@@ -28,7 +28,7 @@ function Article() {
     content: "",
     category: "",
     subcategory: "",
-    is_Featured: false,
+    is_featured: false,
     status: "Published",
   });
 
@@ -37,15 +37,6 @@ function Article() {
   const editor = useRef(null);
   const [imgPreview, setImgPreview] = useState("");
   const [imgUploadSuc, setImgUploadSuc] = useState(false);
-
-  useEffect(() => {
-    // Auto-load draft if exists
-    const savedDraft = localStorage.getItem("blogData");
-    if (savedDraft) {
-      setFormData(JSON.parse(savedDraft));
-      toast.success("Loaded saved draft!");
-    }
-  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -74,7 +65,7 @@ function Article() {
         if (imageURL.url) {
           setFormData((prev) => ({
             ...prev,
-            image: imageURL.url,
+            image_url: imageURL.url,
           }));
           toast.success("Image uploaded!");
           setImgPreview(imageURL.url);
@@ -97,7 +88,7 @@ function Article() {
 
     try {
       if (
-        !formData.image ||
+        !formData.image_url ||
         !formData.title.trim() ||
         !formData.content.trim() ||
         !formData.author.trim() ||
@@ -111,14 +102,14 @@ function Article() {
       const res = await axios.post(
         `http://localhost:3000/api/articles/create`,
         {
-          image_url: formData.image,
+          image_url: formData.image_url,
           title: formData.title,
           imgDescription: formData.imgDescription,
           summary: formData.summary,
           author: formData.author,
           content: formData.content,
           category: formData.category,
-          subcategory: formData.category,
+          subcategory: formData.subcategory,
           tags: formData.tags,
           is_featured: formData.is_featured,
           status: formData.status,
@@ -128,7 +119,7 @@ function Article() {
       if (res.data.success) {
         toast.success(res.data.message || "Article posted successfully!");
         setFormData({
-          image: "",
+          image_url: "",
           title: "",
           imgDescription: "",
           description: "",
@@ -144,6 +135,7 @@ function Article() {
       }
     } catch (err) {
       toast.error("Error posting Article!");
+      console.log(err);
     }
 
     setLoading(false);
@@ -264,9 +256,9 @@ function Article() {
           {/* is featured */}
           {/* This is currently not working! */}
           <Label
-            value={formData.is_Featured}
+            value={formData.is_featured}
             onValueChange={(value) =>
-              setFormData((prevData) => ({ ...prevData, is_Featured: value }))
+              setFormData((prevData) => ({ ...prevData, is_featured: value }))
             }
             className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-[[aria-checked=true]]:border-blue-600 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 dark:has-[[aria-checked=true]]:bg-blue-950"
           >
