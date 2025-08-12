@@ -5,7 +5,7 @@ function HomeSection() {
   const pageArr = [
     {
       name: "Add Article",
-      link: "/add-articles",
+      link: "/add-article",
       logo: (
         <svg
           xmlns="http://www.w3.org/2000/svg"

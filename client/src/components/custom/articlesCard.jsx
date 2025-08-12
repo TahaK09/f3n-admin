@@ -1,7 +1,9 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function ArticlesCard({ image, title, description, date, slug }) {
+function ArticlesCard({ image, title, description, date, slug, _id }) {
+  const navigate = useNavigate();
+
   const OpenSvg = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +47,9 @@ function ArticlesCard({ image, title, description, date, slug }) {
             {OpenSvg}
           </a>
           <button
-            onClick={<Navigate to="/" replace={true} />}
+            onClick={() => {
+              navigate(`/edit/${_id}`);
+            }}
             className="bg-black/50 p-1 rounded-full hover:bg-black/70 transition"
             title="Edit Article"
           >

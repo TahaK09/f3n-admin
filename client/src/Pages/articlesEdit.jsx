@@ -41,6 +41,7 @@ function ArticlesEdit() {
               tag={article.tag}
               date={article.createdAt}
               slug={article.slug}
+              _id={article._id}
             />
           ))}
         </div>

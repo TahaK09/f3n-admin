@@ -36,11 +36,12 @@ const router = createBrowserRouter([
     ),
     children: [
       { path: "/", element: <HomeSection /> },
-      { path: "add-articles", element: <Article /> },
+      { path: "add-article", element: <Article /> },
       { path: "edit-article", element: <ArticlesEdit /> },
       { path: "image-gallery", element: <ImageSection /> },
       { path: "featured-video", element: <VideoFeatures /> },
       { path: "add-links", element: <>Add Links</> },
+      { path: "edit/:_id", element: <Article /> },
     ],
   },
   { path: "*", element: "Nothing Found!" },
