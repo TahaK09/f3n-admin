@@ -144,24 +144,22 @@ function HomeSection() {
   ];
 
   return (
-    <>
-      <div className="w-full min-h-screen flex justify-center items-center">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {pageArr.map((page, idx) => (
-            <NavLink
-              key={idx}
-              to={page.link}
-              className="flex flex-col gap-1 w-[200px] h-[300px] py-3 px-2.5 rounded-xl shadow-md border border-gray-200 hover:scale-110 transition-all shadow-gray-300 justify-center items-center cursor-pointer"
-            >
-              {page.logo}
-              <div className="text-lg font-medium text-gray-500">
-                {page.name}
-              </div>
-            </NavLink>
-          ))}
-        </div>
+    <div className="w-full min-h-screen flex justify-center items-center p-2 sm:p-6 md:p-10">
+      <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 sm:gap-8">
+        {pageArr.map((page, idx) => (
+          <NavLink
+            key={idx}
+            to={page.link}
+            className="flex flex-col gap-3 w-full sm:w-48 h-56 sm:h-64 p-4 border border-gray-200 transition-transform duration-200 shadow-gray-200 justify-center items-center text-center bg-white"
+          >
+            {page.logo}
+            <div className="text-base sm:text-lg font-medium text-gray-600">
+              {page.name}
+            </div>
+          </NavLink>
+        ))}
       </div>
-    </>
+    </div>
   );
 }
 

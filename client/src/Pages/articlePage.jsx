@@ -198,7 +198,7 @@ function Article() {
         className="bg-white items-center min-h-[800px] px-20 py-6 w-full flex flex-col lg:flex-row gap-6"
       >
         {/* Editor Section */}
-        <div className="flex-1 w-full h-full">
+        <div className="flex-1 w-[90vw] lg:w-full h-full">
           <JoditEditor
             ref={editor}
             value={formData.content}
@@ -214,7 +214,7 @@ function Article() {
         </div>
 
         {/* Side Form Section */}
-        <div className="w-full lg:w-[350px] flex flex-col self-start gap-4">
+        <div className="w-[350px] flex flex-col self-start gap-4">
           {/* Image Upload */}
           <div className="w-full h-full">
             {imgUploadSuc ? (
@@ -332,6 +332,9 @@ function Article() {
                 <SelectItem value="movies">Movies</SelectItem>
                 <SelectItem value="music">Music</SelectItem>
                 <SelectItem value="celebrities">Celebrities</SelectItem>
+                <SelectItem value="politics">Politics</SelectItem>
+                <SelectItem value="crime">Crime</SelectItem>
+                <SelectItem value="trending">Trending</SelectItem>
                 <SelectItem value="others">Others</SelectItem>
               </SelectGroup>
             </SelectContent>
