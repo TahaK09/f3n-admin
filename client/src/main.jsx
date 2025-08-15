@@ -19,6 +19,8 @@ import { AuthContextProvider } from "./context/authContext.jsx";
 import AuthGuard from "./lib/authGaurd.jsx";
 import PublicLayout from "./components/layouts/publicLayouts.jsx";
 import PrivateLayout from "./components/layouts/privateLayouts.jsx";
+import Tutorials from "./Pages/tutorials.jsx";
+import Guides from "./Pages/guides.jsx";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,8 @@ const router = createBrowserRouter([
       { path: "featured-video", element: <VideoFeatures /> },
       { path: "add-links", element: <>Add Links</> },
       { path: "edit/:_id", element: <Article /> },
+      { path: "tutorials", element: <Tutorials /> },
+      { path: "tutorials/guides", element: <Guides /> },
     ],
   },
   { path: "*", element: "Nothing Found!" },
