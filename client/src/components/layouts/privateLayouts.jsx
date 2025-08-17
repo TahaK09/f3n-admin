@@ -13,7 +13,7 @@ export default function PrivateLayout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const name = "User";
   const email = "tahafirozkhan39@gmail.com";
-  const getNotificationsCount = 2;
+
   const handleLogout = async () => {
     await signOut();
     navigate("/signin");
@@ -121,9 +121,7 @@ export default function PrivateLayout() {
               className="relative cursor-pointer"
             >
               <img src={bell_icon} alt="" className="w-auto h-auto" />
-              <button className="absolute -top-2 -right-3 text-xs text-white bg-green-500 w-[18px] h-[18px] rounded-full">
-                {getNotificationsCount}
-              </button>
+              <button className="absolute -top-0.75 -right-0.75 text-xs text-white bg-green-600 w-[10px] h-[10px] rounded-full"></button>
             </div>
 
             <div className="relative group">
@@ -148,25 +146,6 @@ export default function PrivateLayout() {
           </div>
 
           <div className="flex items-center gap-6 sm:hidden ">
-            <div
-              onClick={() => navigate("/cart")}
-              className="relative cursor-pointer"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 14 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M.583.583h2.333l1.564 7.81a1.17 1.17 0 0 0 1.166.94h5.67a1.17 1.17 0 0 0 1.167-.94l.933-4.893H3.5m2.333 8.75a.583.583 0 1 1-1.167 0 .583.583 0 0 1 1.167 0m6.417 0a.583.583 0 1 1-1.167 0 .583.583 0 0 1 1.167 0"
-                  stroke="#615fff"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
             <button
               onClick={() => (open ? setOpen(false) : setOpen(true))}
               aria-label="Menu"
@@ -211,17 +190,15 @@ export default function PrivateLayout() {
               <Link to="/" onClick={() => setOpen(false)}>
                 Home
               </Link>
-              <Link to="/" onClick={() => setOpen(false)}>
-                More Products
+              <Link to="/edit-articles" onClick={() => setOpen(false)}>
+                Articles
               </Link>
 
-              <Link to="/" onClick={() => setOpen(false)}>
-                My Orders
+              <Link to="/tutorials" onClick={() => setOpen(false)}>
+                Tutorials
               </Link>
 
-              <Link to="/" onClick={() => setOpen(false)}>
-                Contact
-              </Link>
+              <button onClick={handleLogout}>Logout</button>
 
               <button
                 onClick={signOut}
