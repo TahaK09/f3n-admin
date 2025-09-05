@@ -4,7 +4,6 @@ import { Outlet, useNavigate, Link } from "react-router-dom";
 import { UserAuth } from "../../context/authContext.jsx";
 import { Toaster } from "react-hot-toast";
 import Logo from "../../assets/f3news-logo-new.png";
-import profile_icon from "../../assets/profile_icon.png";
 import bell_icon from "../../assets/bell_icon.svg";
 
 export default function PrivateLayout() {

@@ -39,7 +39,7 @@ function ArticlesCard({ image, title, description, date, slug, _id }) {
         {/* Icon container */}
         <div className="absolute top-2 right-2 flex gap-2">
           <a
-            href={`${import.meta.env.VITE_WEBSITE_URL}/india/article/${slug}`}
+            href={`https://www.f3news.in/india/article/${slug}`}
             target="_blank"
             className="bg-black/50 p-1 rounded-full hover:bg-black/70 transition hover:none"
             title="Open Article"
